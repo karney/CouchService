@@ -1,73 +1,43 @@
 [
 	{
-		"day": "Monday",
-		"highTemperature": 28,
-		"lowTemperature": 14,
-		"image": "shower"
-	}, {
-		"day": "Tuesday",
-		"highTemperature": 35,
-		"lowTemperature": 18,
-		"image": "sunny"
-	}, {
-		"day": "Wednesday",
-		"highTemperature": 30,
-		"lowTemperature": 16,
-		"image": "partly-sunny"
-	}, {
-		"day": "Thursday",
-		"highTemperature": 28,
-		"lowTemperature": 13,
-		"image": "sunny"
-	}, {
-		"day": "Friday",
-		"highTemperature": 22,
-		"lowTemperature": 12,
-		"image": "cloudy"
-	}, {
-		"day": "Saturday",
-		"highTemperature": 21,
-		"lowTemperature": 14,
-		"image": "foggy"
-	}, {
-		"day": "Sunday",
-		"highTemperature": 33,
-		"lowTemperature": 15,
+		"day": "Середа",
+		"highTemperature": -4,
+		"lowTemperature": -12,
 		"image": "storm"
 	}, {
-		"day": "Monday",
-		"highTemperature": 28,
-		"lowTemperature": 14,
+		"day": "Четвер",
+		"highTemperature": -3,
+		"lowTemperature": -18,
+		"image": "storm"
+	}, {
+		"day": "Пятниця",
+		"highTemperature": -7,
+		"lowTemperature": -19,
+		"image": "storm"
+	}, {
+		"day": "Субота",
+		"highTemperature": -7,
+		"lowTemperature": -13,
 		"image": "shower"
 	}, {
-		"day": "Tuesday",
-		"highTemperature": 35,
-		"lowTemperature": 18,
-		"image": "sunny"
-	}, {
-		"day": "Wednesday",
-		"highTemperature": 30,
-		"lowTemperature": 16,
-		"image": "partly-sunny"
-	}, {
-		"day": "Thursday",
-		"highTemperature": 28,
-		"lowTemperature": 13,
-		"image": "sunny"
-	}, {
-		"day": "Friday",
-		"highTemperature": 22,
-		"lowTemperature": 12,
+		"day": "Неділя",
+		"highTemperature": -5,
+		"lowTemperature": -12,
 		"image": "cloudy"
 	}, {
-		"day": "Saturday",
-		"highTemperature": 21,
-		"lowTemperature": 14,
+		"day": "Понеділок",
+		"highTemperature": -6,
+		"lowTemperature": -10,
 		"image": "foggy"
 	}, {
-		"day": "Sunday",
-		"highTemperature": 33,
-		"lowTemperature": 15,
+		"day": "Вівторок",
+		"highTemperature": 2,
+		"lowTemperature": -5,
 		"image": "storm"
-	} 
+	}, {
+		"day": "Середа",
+		"highTemperature": 3,
+		"lowTemperature": -3,
+		"image": "sunny"
+	}
 ]

@@ -15,65 +15,299 @@
     <script src="scripts/location.js"></script>
     <script src="scripts/weather.js"></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/ko.js"></script>
+    <script src="scripts/koMap.js"></script>
+    <script src="scripts/models.js"></script>
+    <script src="scripts/Global_variables.js"></script>
+    <script src="scripts/Sync.js"></script>
+    <script src="scripts/jlinq.js"></script>
+    <script src="scripts/AllPages.js"></script>
+    <script src="scripts/jquery-tmpl.js"></script><!--
+    <script src="scripts/jquery.mobile.external-png-1.4.2.css"></script>
+    <script src="scripts/jquery.mobile.external-png-1.4.2.min.css"></script>
+    <script src="scripts/jquery.mobile.icons-1.4.2.css"></script>
+    <script src="scripts/jquery.mobile.inline-png-1.4.2.css"></script>
+    <script src="scripts/jquery.mobile.inline-png-1.4.2.min.css"></script>
+    <script src="scripts/jquery.mobile.inline-svg-1.4.2.css"></script>
+    <script src="scripts/jquery.mobile.inline-svg-1.4.2.min.css"></script>
+    <script src="scripts/jquery.mobile.theme-1.4.2.css"></script>
+    <script src="scripts/jquery.mobile.theme-1.4.2.min.css"></script>
+    <script src="scripts/jquery.mobile-1.4.2.css"></script>
+    <script src="scripts/jquery.mobile-1.4.2.js"></script>
+    <script src="scripts/jquery.mobile-1.4.2.min.css"></script>
+    <script src="scripts/jquery.mobile-1.4.2.min.map"></script>
+    <script src="scripts/jquery.mobile-1.4.2.min.js"></script>-->
 
+    
+    
+	
+    
+    <script id="Template-expenses" type="text/html">
+		<li data-theme="a" data-role="collapsible" data-collapsed="true">
+			<a name='${Name}' id='eventLink' data-transition="slide" href='#page-eventdetails' onclick='gotoEvent(name)'>
+				<h4>${Country}</h4>
+				<h5>${City}</h4>
+        		<h7>${DateStart}</h4>
+			</a>
+		</li>
+    </script>
+    
+    <script id="Template-houses" type="text/html">
+		<li data-theme="a" data-role="collapsible" data-collapsed="true">
+			<a name='${ID}' id='houseLink' data-transition="slide" href='#page-housedetails' onclick='gotoHouse(name)'>
+				<h4>${Address} Rating = ${Rating}</h4>
+				
+			</a>
+		</li>
+    </script>
+    
+    
+    
 </head>
+    
+    <style scoped>
+.button {
+    margin-left: .5em;
+    text-align: center;
+}
+.km-root .selected-button
+{
+    color: #fff;
+    background-color: #f60;
+}
+/* solid filled buttons in iOS7 should override the border-color */
+.km-ios7 .selected-button
+{
+    border-color: transparent;
+}
+.button:first-of-type {
+    margin-left: 1em;
+}
+.home {
+    background: url(../../content/mobile/shared/sports-home.jpg) no-repeat center center;	
+}
+.facility {
+    background: url(../../content/mobile/shared/sports-facility.jpg) no-repeat center center;	
+}
+.sports {
+    background: url(../../content/mobile/shared/sports.jpg) no-repeat center center;	
+}
+#button-home .head,
+#facility .head,
+#sports .head {
+	display: block;
+	margin: 1em;
+	height: 120px;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto;
+}
+.km-ios .head,
+.km-blackberry .head {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+        
+        
+        .km-ios #listview-home .km-content {
+        background: url(../../content/shared/images/patterns/pattern2.png);
+        box-shadow: inset 0 0 30px #95764D;
+        -webkit-box-shadow: inset 0 0 30px #95764D;
+    }
+    .km-ios #listview-home .km-listview .km-list {
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        box-shadow: 0 1px 5px #95764D;
+        -webkit-box-shadow: 0 1px 5px #95764D;
+    }
+    .km-ios #listview-home .km-listview .km-list > li {
+        border: none;
+    }
+    .km-ios #listview-home .km-listview .km-list > li:last-child {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    .km-ios #listview-home .km-navbar {
+        background: url(../../content/shared/images/patterns/pattern9.png);
+    }
+    .km-tablet .km-ios #listview-home .km-view-title {
+        color: #fff;
+        text-shadow: 0 -1px rgba(0,0,0,.5);
+    }
+    .km-ios #listview-home .km-navbar .km-button
+    {
+        background-color: #974d2e;
+    }
+</style>
+    
 <body>
     <!--Home-->
     <div id="tabstrip-home"
         data-role="view"
         data-title="Home">
-
-        <div class="view-content">
-            <h1>Welcome!</h1>
-            <a id="skin-change" data-role="button" data-click="app.changeSkin">Flat</a>
-            <p>
-                Icenium&trade; enables you to build cross-platform device applications regardless of your
-                    development platform by combining the convenience of a local development toolset with the
-                    power and flexibility of the cloud.
-            </p>
-            <div class="img"></div>
-        </div>
+        <div data-role="content">
+			<h1>HELLO! U're welcome</h1>
+			<h2>to CouchSurfing App</h2>
+			<div id="mainJobs">
+                <h2><a class="button" data-role="button" style="width:220px" id="downloadButton">Download all data</a></h2>    
+                <h2><a class="button" data-role="button" href="#tabstrip-events" style="width:220px" id="butonevents">Show All events</a></h2>    
+                <h2><a class="button" data-role="button" href="#tabstrip-houses" style="width:220px" id="buttonHouses">Show All houses</a></h2>
+			</div>
+			</div>
     </div>
-
-    <!--Login-->
-    <div id="tabstrip-login"
+    
+    
+    <!--<script>
+            function setli(){
+        
+        
+        var ripka;
+        $('#listik').html( $('#listik').html()+"<li>Events");
+                for(ripka=0;ripka<=5;ripka++){
+                 $('#listik').html( $('#listik').html()+"<ul><li data-icon='toprated'><a>Very interesting event #"+ripka+"</a></li></ul>");
+                 }
+                $('#listik').html( $('#listik').html()+"</li>");
+                
+        var bibka;
+        $('#houseList').html( $('#houseList').html()+"<li>Houses");
+                for(bibka=0;bibka<=5;bibka++){
+                 $('#houseList').html( $('#houseList').html()+"<ul><li data-icon='toprated'><a>Very interesting house #"+bibka+"</a></li></ul>");
+                 }
+                $('#houseList').html( $('#houseList').html()+"</li>");
+                
+                
+            }
+    </script>-->
+    
+    
+    
+    <!--Events-->
+    <div id="tabstrip-events"
         data-role="view"
-        data-title="Login"
-        data-model="app.loginService.viewModel">
-
-        <div class="view-content">
-            <div class="logo"></div>
-            <h3 data-bind="invisible: isLoggedIn">Enter your credentials:</h3>
-            <h1 class="welcome" data-bind="visible: isLoggedIn">Welcome, <span data-bind="text: username"></span>!
-            </h1>
-            <div class="buttonArea">
-                <input type="submit" id="logout" data-role="button" data-bind="click: onLogout, visible: isLoggedIn" class="login-button" value="Logout" />
-            </div>
-
-            <form data-bind="events: { keyup: checkEnter }">
-                <ul data-role="listview" data-style="inset" data-bind="invisible: isLoggedIn">
-                    <li>
-                        <label>
-                            Username
-                                <input type="text" data-bind="value: username" />
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            Password
-                                <input type="password" data-bind="value: password" />
-                        </label>
-                    </li>
-                </ul>
-
-                <div class="buttonArea">
-                    <input type="submit" id="login" data-role="button" data-bind="click: onLogin, invisible: isLoggedIn" class="login-button" value="Login" />
-                </div>
-            </form>
+        data-title="Events"> 
+        <div data-role="content" class="content">
+            
+                
+			<ul data-role="listview" data-split-icon="gear" data-theme="c" data-divider-theme="c" id="expensesShownList" data-inset="true">
+			</ul>   
         </div>
-
+       
+    </div>
+    
+ <!--Houses-->
+    <div id="tabstrip-houses"
+        data-role="view"
+        data-title="Houses"> 
+        <div data-role="content" class="content">
+            
+               <ul id="houseList"data-role="listview" data-split-icon="gear" data-theme="c" data-divider-theme="c" data-inset="true">
+                   
+               </ul>      
+        </div>
+       
     </div>
 
+    
+    
+        <div id="page-eventdetails"
+        data-role="view"
+        data-title="Event"> 
+       <div data-role="content" class="content-overflow">
+
+			<h2 id="jDetailsLabel">Event details</h2>
+            
+			<form id="jForm" method="get">
+
+				<div id="contentPrimary" class="content-primary">
+					<br />
+                    <div id="vDb" class="dateboxField">
+						<label for="linked2">Name</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Name" id="linked2"/>
+						<br />
+					</div>
+					<div id="jst" class="dateboxField">
+						<label for="linked2">DateStart</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: DateStart" id="linked2"/>
+						<br />
+					</div>
+
+					<div id="vDb" class="dateboxField">
+						<label for="linked2">DateEnd</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: DateEnd" id="linked2"/>
+						<br />
+					</div>
+                    
+                    <div id="vDb" class="dateboxField">
+						<label for="linked2">Country</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Country" id="linked2"/>
+						<br />
+					</div>
+                     <div id="vDb" class="dateboxField">
+						<label for="linked2">City</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: City" id="linked2"/>
+						<br />
+					</div>
+                     <div id="vDb" class="dateboxField">
+						<label for="linked2">Description</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Description" id="linked2"/>
+						<br />
+					</div>
+			
+                    <input data-theme='d' id="SaveEvent" type="submit" value="SAVE" >
+				</div>
+			</form>
+		</div>
+       
+    </div>
+    
+    
+    
+        <div id="page-housedetails"
+        data-role="view"
+        data-title="Houses"> 
+       <div data-role="content" class="content-overflow">
+
+			<h2 id="jDetailsLabel">Event details</h2>
+            
+			<form id="jForm" method="get">
+
+				<div id="contentPrimary" class="content-primary">
+					<br />
+                    <div id="vDb" class="dateboxField">
+						<label for="linked2">ID</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: ID" id="linked2"/>
+						<br />
+					</div>
+					<div id="jst" class="dateboxField">
+						<label for="linked2">Address</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Address" id="linked2"/>
+						<br />
+					</div>
+
+					<div id="vDb" class="dateboxField">
+						<label for="linked2">Rating</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Rating" id="linked2"/>
+						<br />
+					</div>
+                    
+                    <div id="vDb" class="dateboxField">
+						<label for="linked2">UserMarks</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: UserMarks" id="linked2"/>
+						<br />
+					</div>
+                     <div id="vDb" class="dateboxField">
+						<label for="linked2">Comments</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Comments" id="linked2"/>
+						<br />
+					</div>			
+                    <input data-theme='d' id="SaveHouse" type="submit" value="SAVE" >
+				</div>
+			</form>
+		</div>
+       
+    </div>
+    
+    
+    
     <!--Location-->
     <div id="tabstrip-location"
         data-role="view"
@@ -105,8 +339,7 @@
         data-model="app.weatherService.viewModel">
 
         <div class="weather">
-            <p class="weather-title">20-Day Forecast</p>
-
+            <p class="weather-title">Погода на 7 днів</p>
             <div class="separator">
                 <div class="dark"></div>
                 <div class="light"></div>
@@ -149,8 +382,9 @@
         <!--Footer-->
         <div data-role="footer">
             <div data-role="tabstrip">
-                <a href="#tabstrip-home" data-icon="home">Home</a>
-                <a href="#tabstrip-login" data-icon="contacts">Login</a>
+                <a href="#tabstrip-home" data-icon="favorites">Home</a>
+                <a href="#tabstrip-events" data-icon="cart">Events</a>
+                <a href="#tabstrip-houses" data-icon="home">Houses</a>
                 <a href="#tabstrip-location" data-icon="search">Location</a>
                 <a href="#tabstrip-weather" data-icon="globe">Weather</a>
             </div>
