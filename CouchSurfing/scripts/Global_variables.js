@@ -3,12 +3,14 @@ var iseventsloaded=false;
 var countofevents=0;
 var allEvents;
 var allHouses;
+var currentEventMY;
+var longitudeMY;
+var latitudeMY;
 
 function gotoEvent(nnn){
      console.log('click');
             var name = nnn;
-			currEventId = name;
-            console.log(currEventId);
+    		currentEventMY=name;
             try {
                 chExpenseJS = jlinq.from(allEvents).equals("Name", currEventId).first();
             

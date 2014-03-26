@@ -19,17 +19,18 @@
             that.showLoading();
 
             navigator.geolocation.getCurrentPosition(
+            
                 function (position) {
-                    position = new google.maps.LatLng(49.835228,24.00827);//position.coords.latitude, position.coords.longitude);
+                    position = new google.maps.LatLng(longitudeMY,latitudeMY);//(49.835228,24.00827);//position.coords.latitude, position.coords.longitude);
                     map.panTo(position);
                     that._putMarker(position);
 
                     that._isLoading = false;
                     that.hideLoading();
                 },
-                function (error) {
+                function (error) {console.log('dsa');
                     //default map coordinates
-                    position = new google.maps.LatLng(49.835228,24.00827);
+                    position = new google.maps.LatLng(2.835228,24.00827);
                     map.panTo(position);
 
                     that._isLoading = false;

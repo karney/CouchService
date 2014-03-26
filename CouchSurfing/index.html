@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<html manifest="index.cache">
+<html>
 <head>
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    
+    <title></title>
+    <meta charset="utf-8" />
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
     <link href="styles/main.css" rel="stylesheet" />
 
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
     <script src="kendo/js/kendo.mobile.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
 
     <script src="scripts/login.js"></script>
     <script src="scripts/location.js"></script>
@@ -24,10 +22,26 @@
     <script src="scripts/Sync.js"></script>
     <script src="scripts/jlinq.js"></script>
     <script src="scripts/AllPages.js"></script>
-    <script src="scripts/jquery-tmpl.js"></script>
-    <script src="scripts/index.js"></script>
-   
-        
+    <script src="scripts/jquery-tmpl.js"></script><!--
+    <script src="scripts/jquery.mobile.external-png-1.4.2.css"></script>
+    <script src="scripts/jquery.mobile.external-png-1.4.2.min.css"></script>
+    <script src="scripts/jquery.mobile.icons-1.4.2.css"></script>
+    <script src="scripts/jquery.mobile.inline-png-1.4.2.css"></script>
+    <script src="scripts/jquery.mobile.inline-png-1.4.2.min.css"></script>
+    <script src="scripts/jquery.mobile.inline-svg-1.4.2.css"></script>
+    <script src="scripts/jquery.mobile.inline-svg-1.4.2.min.css"></script>
+    <script src="scripts/jquery.mobile.theme-1.4.2.css"></script>
+    <script src="scripts/jquery.mobile.theme-1.4.2.min.css"></script>
+    <script src="scripts/jquery.mobile-1.4.2.css"></script>
+    <script src="scripts/jquery.mobile-1.4.2.js"></script>
+    <script src="scripts/jquery.mobile-1.4.2.min.css"></script>
+    <script src="scripts/jquery.mobile-1.4.2.min.map"></script>
+    <script src="scripts/jquery.mobile-1.4.2.min.js"></script>-->
+
+    
+    
+	
+    
     <script id="Template-expenses" type="text/html">
 		<li data-theme="a" data-role="collapsible" data-collapsed="true">
 			<a name='${Name}' id='eventLink' data-transition="slide" href='#page-eventdetails' onclick='gotoEvent(name)'>
@@ -48,7 +62,9 @@
     </script>
     
     
-	<title>Couch surfing mobile</title>
+    
+</head>
+    
     <style scoped>
 .button {
     margin-left: .5em;
@@ -76,7 +92,6 @@
 .sports {
     background: url(../../content/mobile/shared/sports.jpg) no-repeat center center;	
 }
-#map-page, #map-canvas { width: 100%; height: 100%; padding: 0; }
 #button-home .head,
 #facility .head,
 #sports .head {
@@ -124,9 +139,6 @@
     }
 </style>
     
-</head>
-    
-    
 <body>
     <!--Home-->
     <div id="tabstrip-home"
@@ -139,6 +151,7 @@
                 <h2><a class="button" data-role="button" style="width:220px" id="downloadButton">Download all data</a></h2>    
                 <h2><a class="button" data-role="button" href="#tabstrip-events" style="width:220px" id="butonevents">Show All events</a></h2>    
                 <h2><a class="button" data-role="button" href="#tabstrip-houses" style="width:220px" id="buttonHouses">Show All houses</a></h2>
+                	<a href="#tabstrip-location" data-icon="search" onclick='changeviewtomap()'>Goto map</a>
 			</div>
 			</div>
     </div>
@@ -239,20 +252,18 @@
 						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Description" id="linked2"/>
 						<br />
 					</div>
-                    
                      <div id="vDb" class="dateboxField">
 						<label for="linked2">Longitude</label>
 						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Longitude" id="linked2"/>
 						<br />
 					</div>
-                    
                      <div id="vDb" class="dateboxField">
 						<label for="linked2">Latitude</label>
 						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Latitude" id="linked2"/>
 						<br />
 					</div>
 			
-                    <input data-theme='d' id="GotoMap" type="submit" value="GotoMap" >
+                	<a href="#tabstrip-location" data-icon="search" onclick='changeviewtomap()'>Goto map</a>
                     <input data-theme='d' id="SaveEvent" type="submit" value="SAVE" >
 				</div>
 			</form>
@@ -307,7 +318,6 @@
        
     </div>
     
-      
     
     
     <!--Location-->
@@ -371,11 +381,6 @@
         </div>
     </script>
 
-    
-    
-    
-    
-    
     <!--Layout-->
     <div data-role="layout" data-id="tabstrip-layout">
 

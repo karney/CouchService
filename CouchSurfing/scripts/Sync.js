@@ -27,6 +27,34 @@ function SyncHouses() {
     
 } 
 
+function SaveHouses(curhouse) {
+    console.log('save houses');
+ 
+    
+    $.ajax({
+            url: url + "SetHouses?ID="+curhouse.ID+"&a="+curhouse.Address+"&r="+curhouse.Rating+"&u"+curhouse.UserMarks+"&c="+curhouse.Comments,
+            type: 'GET',
+            dataType: 'text',
+            success : function(text){processHousesData(text);},
+            error:processError
+    });
+    
+} 
+
+function SaveEvents(curEvent) {
+    console.log('sadadas');
+ 
+    
+    $.ajax({
+            url: url + "SetEven?n"+curEvent.Name+"&c="+curEvent.Country+"&ci="+curEvent.City+"&d="+curEvent.Description+"&l="+curEvent.Longitude+"&la="+curEvent.Latitude,
+            type: 'GET',
+            dataType: 'text',
+            success : function(text){processExpensesData(text);},
+            error:processError
+    });
+    
+} 
+
 
 function processError(jqXHR, textStatus, errorThrown) {
     alert("Sync Error: " + textStatus + " " + jqXHR.status + ": " + GetErrorMessageByCode(jqXHR.status));

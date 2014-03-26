@@ -50,3 +50,21 @@ function createListHouses(){
                     });        
 }
 
+
+function changeviewtomap(){
+		try{
+            var curJs = jlinq.from(allEvents).equals("Name", currentEventMY).first();
+                if(currJs){
+                longitudeMY=curJs.Longitude;
+                latitudeMY=curJs.Latitude;
+                }
+        }catch(e){
+            longitudeMY=49.835228;
+        	latitudeMY=24.00827;
+    	}
+    
+    console.log(longitudeMY);
+    console.log(latitudeMY);
+    console.log(latitudeMY);
+    
+}
