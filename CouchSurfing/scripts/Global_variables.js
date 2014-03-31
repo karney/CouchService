@@ -1,4 +1,4 @@
-var url = "http://localhost:53255/Service1.svc/JSON/";
+var url = "http://192.168.2.157:53255/Service1.svc/JSON/";
 var iseventsloaded=false;
 var countofevents=0;
 var allEvents;
@@ -6,13 +6,15 @@ var allHouses;
 var currentEventMY;
 var longitudeMY;
 var latitudeMY;
+var countEvents;
+var countHouses;
 
 function gotoEvent(nnn){
      console.log('click');
             var name = nnn;
     		currentEventMY=name;
             try {
-                chExpenseJS = jlinq.from(allEvents).equals("Name", currEventId).first();
+                chExpenseJS = jlinq.from(allEvents).equals("Name", currentEventMY).first();
             
             if (chExpenseJS) {
                 var cm = new childModel(chExpenseJS);

@@ -2,6 +2,8 @@
 
 $('#tabstrip-home').ready(function (e) {
  
+     longitudeMY=49.835228;
+        	latitudeMY=24.00827;
     $('#downloadButton').click(function (e) {
         SyncExpensesNow();
  	   SyncHouses();   
@@ -53,8 +55,9 @@ function createListHouses(){
 
 function changeviewtomap(){
 		try{
+           // debugger;
             var curJs = jlinq.from(allEvents).equals("Name", currentEventMY).first();
-                if(currJs){
+                if(curJs){
                 longitudeMY=curJs.Longitude;
                 latitudeMY=curJs.Latitude;
                 }
@@ -62,9 +65,9 @@ function changeviewtomap(){
             longitudeMY=49.835228;
         	latitudeMY=24.00827;
     	}
-    
+     longitudeMY=49.835228;
+        	latitudeMY=24.00827;
     console.log(longitudeMY);
-    console.log(latitudeMY);
     console.log(latitudeMY);
     
 }

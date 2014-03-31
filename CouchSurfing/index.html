@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title></title>
-    <meta charset="utf-8" />
-    <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
-    <link href="styles/main.css" rel="stylesheet" />
-
-    <script src="cordova.js"></script>
-    <script src="kendo/js/jquery.min.js"></script>
-    <script src="kendo/js/kendo.mobile.min.js"></script>
+	<head>
+		<title></title>
+        <meta charset="UTF-8" />
+		<link href="jquery-mobile/jquery.mobile-1.3.1.min.css" rel="stylesheet" type="text/css" />
+        <!-- uncoment viewport meta tag, if targeting Android 4.x.x devices -->
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+		<script src="cordova.js" type="text/javascript"></script>
+		<script src="jquery-mobile/jquery.min.js" type="text/javascript"></script>
+		<script src="jquery-mobile/jquery.mobile-1.3.1.min.js" type="text/javascript"></script>
+        <script>
+          $(function() { 
+            $.mobile.defaultHomeScroll = 0;
+          });
+        </script>
+		<script src="scripts/airlinedata.js" type="text/javascript"></script>
+		<script src="scripts/seatmapdrawing.js" type="text/javascript"></script>
+		<script src="scripts/main.js" type="text/javascript"></script>
+        
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
 
-    <script src="scripts/login.js"></script>
+   <!-- <script src="kendo/js/kendo.mobile.min.js"></script>-->
+        
+    <!--<script src="scripts/login.js"></script>
     <script src="scripts/location.js"></script>
-    <script src="scripts/weather.js"></script>
+    <script src="scripts/weather.js"></script>-->
     <script src="scripts/app.js"></script>
     <script src="scripts/ko.js"></script>
     <script src="scripts/koMap.js"></script>
@@ -22,385 +33,323 @@
     <script src="scripts/Sync.js"></script>
     <script src="scripts/jlinq.js"></script>
     <script src="scripts/AllPages.js"></script>
-    <script src="scripts/jquery-tmpl.js"></script><!--
-    <script src="scripts/jquery.mobile.external-png-1.4.2.css"></script>
-    <script src="scripts/jquery.mobile.external-png-1.4.2.min.css"></script>
-    <script src="scripts/jquery.mobile.icons-1.4.2.css"></script>
-    <script src="scripts/jquery.mobile.inline-png-1.4.2.css"></script>
-    <script src="scripts/jquery.mobile.inline-png-1.4.2.min.css"></script>
-    <script src="scripts/jquery.mobile.inline-svg-1.4.2.css"></script>
-    <script src="scripts/jquery.mobile.inline-svg-1.4.2.min.css"></script>
-    <script src="scripts/jquery.mobile.theme-1.4.2.css"></script>
-    <script src="scripts/jquery.mobile.theme-1.4.2.min.css"></script>
-    <script src="scripts/jquery.mobile-1.4.2.css"></script>
-    <script src="scripts/jquery.mobile-1.4.2.js"></script>
-    <script src="scripts/jquery.mobile-1.4.2.min.css"></script>
-    <script src="scripts/jquery.mobile-1.4.2.min.map"></script>
-    <script src="scripts/jquery.mobile-1.4.2.min.js"></script>-->
+    <script src="scripts/jquery-tmpl.js"></script>    
+	<link href="jquery-mobile/jquery.mobile-1.3.1.min.css" >
+        
+        
+            <!-- Default Stylesheet -->
+        <link rel="stylesheet" href="styles/main.css" />
+        <!-- Phone 320x480 High DPI (aka Retina) -->
+		<link rel="stylesheet" media="only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-device-pixel-ratio:2)" href="styles/phone-480.css" type="text/css" />
+        <!-- Phone 480x800 Medium DPI (aka Samsung Galaxy S II Skyrocket) -->
+        <link rel="stylesheet" media="only screen and (min-device-width: 320px) and (max-device-width: 508px) and (-webkit-device-pixel-ratio:1.5)" href="styles/phone-800.css" type="text/css" />
+        <!-- Tablet 768x1024 Low DPI (aka iPad 1 & 2") -->
+        <link rel="stylesheet" media="only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-device-pixel-ratio:1)" href="styles/tablet-1024-ldpi.css" type="text/css" />
+        <!-- Tablet 800x1280 Low DPI (aka Samsung Galaxy Tab 8.9" & Lenovo K1) -->
+        <!--<link rel="stylesheet" media="only screen and (min-device-width: 800px) and (max-device-width: 1280px) and (-webkit-device-pixel-ratio:1)" href="styles/tablet-1280.css" type="text/css" />-->
+        <!-- Phone 720x1280 High DPI (aka Google Nexus) -->
+        <link rel="stylesheet" media="only screen and (min-device-width: 720px) and (max-device-width: 1280px) and (-webkit-device-pixel-ratio:2)" href="styles/phone-1280.css" type="text/css" />
+		<!-- Tablet 500x1024 Low DPI (aka Kindle Fire) -->
+        <!--<link rel="stylesheet" media="only screen and (min-device-width: 600px) and (max-device-width: 1024px) and (-webkit-device-pixel-ratio:1)" href="styles/tablet-600-1024.css" type="text/css" />-->
+        <!-- Tablet 768x1024 High DPI (aka iPad3") -->
+        <!--<link rel="stylesheet" media="only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-device-pixel-ratio:2)" href="styles/tablet-1024-hdpi.css" type="text/css" />-->
+	</head>
+	<body>
+        
+        <!-- home page -->
+		<div id="home" data-role="page" data-mini="true">
+			<div data-role="header"  data-position="fixed"  data-tap-toggle="false">
+                <h1>Hi <span id="ffname"></span>!</h1>
+			</div>
+			<div class="info-wrapper">
+				<div class="info-wrapper-left">
+					<div class="ice-logo"></div>
+				</div>
+                
+                <div class="info-wrapper-right">
+                    <h3 class="ui-bar ui-bar-a ui-corner-all" data-theme='c' id='totalEventsss'>Total events:</h3>
+                    <br/>
+                    <h3 class="ui-bar ui-bar-a ui-corner-all" data-theme='c' id='totalhousesss'>Total houses:</h3>
+                </div>
+                <div class="clear"></div>
+            </div>
+           
+			<div data-role="content"> 
+				<ul data-role="listview" id="myTripsView" data-inset="true" data-theme="d">
+					<li>
+						<a href="#myTrips" data-transition="slide">
+							MyTrips <span id="numberOfFlights"></span>
+						</a>
+					</li>
+				</ul>
+				<ul data-role="listview" id="flightStatusView" data-inset="true" data-theme="d">
+					<li>
+						<a data-transition="slide" href="#tabstrip-events" id="butonevents">Show All events <span id="totalEventsss1"></span></a>  
+                    </li>
+				</ul>
+				<ul data-role="listview" id="bagTrackView" data-inset="true" data-theme="d">
+					<li>
+						<a data-transition="slide" href="#tabstrip-houses" id="buttonHouses">Show All houses <span id="totalhousesss1"></span></a>
+					</li>
+				</ul>
+			</div>
+		</div>
 
-    
-    
+		<!-- seatPicker page -->
+		<div id="seatPicker" data-role="page">
+			<div data-role="header" data-position="fixed"  data-tap-toggle="false">
+				<h1>Pick a seat</h1>
+				<a href="#checkIn" data-role="button" id="backButton" data-transition="flip" class="ui-btn-right" data-rel="back">Done</a>
+			</div>
+			<div data-role="content">
+				<div id="seatMapPickerContainer"></div>
+			</div>
+		</div>
+
+		<!-- logon page -->
+		<div id="logon" data-role="page">
+			<div data-role="header" data-position="fixed"  data-tap-toggle="false">
+				<h1>Login</h1>
+			</div>
+			<div data-role="content">
+				<form id="login">
+					Username:
+					<input type="text" id="userName" value="karneyka92@gmail.com" />
+					Password:
+					<input type="password" id="pwd" value="P2ssw0rd" />
+					<input type="submit" value="Login" />
+				</form>
+			</div>
+		</div>
+
+		<!-- tripDetail page -->
+		<div id="tripDetail" data-role="page" data-add-back-btn="true">
+			<div data-role="header" data-position="fixed"  data-tap-toggle="false">
+				<h1>Trip Details</h1>
+                <a data-role="button" href="#home" class="ui-btn-right">Home</a>
+			</div>
+			<div data-role="content">
+				<ul data-role="listview" id="tripDetailList" data-inset="true" data-theme="d">
+					<li class="center-wrapper" data-role="list-divider">
+						<span id="tripDetail-title"></span>
+					</li>
+					<li>
+						<div class="ui-grid-a">
+							<div class="ui-block-a">Flight Number</div>
+							<div class="ui-block-b">
+								<span id="tripDetail-flightNum"></span>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="ui-grid-a">
+							<div class="ui-block-a">Departure Time</div>
+							<div class="ui-block-b">
+								<span id="tripDetail-depart"></span>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="ui-grid-a">
+							<div class="ui-block-a">Seat</div>
+							<div class="ui-block-b">
+								<span id="tripDetail-seat"></span>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<ul data-role="listview" id="tripDetailList-return" data-inset="true" data-theme="d">
+					<li class="center-wrapper" data-role="list-divider">
+						<span id="tripDetail-return-title"></span>
+					</li>
+					<li>
+						<div class="ui-grid-a">
+							<div class="ui-block-a">Flight Number</div>
+							<div class="ui-block-b">
+								<span id="tripDetail-return-flightNum"></span>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="ui-grid-a">
+							<div class="ui-block-a">Departure Time</div>
+							<div class="ui-block-b">
+								<span id="tripDetail-return-depart"></span>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="ui-grid-a">
+							<div class="ui-block-a">Seat</div>
+							<div class="ui-block-b">
+								<span id="tripDetail-return-seat"></span>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<!--boardingPass page-->
+		<div id="boardingPass" data-role="page" data-add-back-btn="true">
+			<div data-role="header" data-position="fixed"  data-tap-toggle="false">
+				<h1>Boarding Pass</h1>
+				<a data-role="button" href="#home" class="ui-btn-right">Home</a>
+			</div>
+			<div data-role="content">
+				<ul data-role="listview" id="boardingPassData" data-inset="true" data-theme="d">
+					<li class="center-wrapper" data-role="list-divider">
+						<span id="boardingpass-cnum"></span>
+					</li>
+					<li class="center-wrapper">
+						<div class="boardingPassCode"></div>
+					</li>
+					<li>
+						<div class="ui-grid-a">
+							<div class="ui-block-a">Passenger</div>
+							<div class="ui-block-b">
+								<span id="boardingpass-passenger"></span>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="ui-grid-a">
+							<div class="ui-block-a">Flight</div>
+							<div class="ui-block-b">
+								<span id="boardingpass-flight"></span>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="ui-grid-a">
+							<div class="ui-block-a">Departure Time</div>
+							<div class="ui-block-b">
+								<span id="boardingpass-depart"></span>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="ui-grid-a">
+							<div class="ui-block-a">Gate</div>
+							<div class="ui-block-b">
+								<span id="boardingpass-gate"></span>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="ui-grid-a">
+							<div class="ui-block-a">Seat</div>
+							<div class="ui-block-b">
+								<span id="boardingpass-seat"></span>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<!--checkIn page-->
+		<div id="checkIn" data-role="page" data-add-back-btn="true">
+			<div data-role="header" data-position="fixed"  data-tap-toggle="false">
+				<h1>Check In</h1>
+                <a data-role="button" href="#home" class="ui-btn-right">Home</a>
+			</div>
+			<div data-role="content">
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<ul data-role="listview" data-inset="true" data-theme="d">
+							<li data-role="list-divider">Flight</li>
+							<li>
+								<span id="checkIn-flight-number"></span>
+							</li>
+                            <li>
+								<span id="checkIn-flight-destination"></span>
+							</li>
+						</ul>
+					</div>
+					<div class="ui-block-b">
+						<ul data-role="listview" data-inset="true" data-theme="d">
+							<li data-role="list-divider">Seat</li>
+							<li>
+								<span id="checkIn-seat"></span>
+							</li>
+							<li>
+								<a href="#seatPicker" data-transition="slide">Change Seat</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<a href="#boardingPass" data-role="button">Check In</a>
+			</div>
+		</div>
+
+		<!--myTrips page-->
+		<div id="myTrips" data-role="page" data-add-back-btn="true">
+			<div data-role="header" data-position="fixed"  data-tap-toggle="false">
+				<h1>My Trips</h1>
+			</div>
+			<div data-role="content">
+				<ul data-role="listview" id="myTripsListView" data-inset="true" data-theme="d">
+				</ul>
+			</div>
+		</div>
+
+		<!--flightStatus page-->
+		<div id="flightStatus" data-role="page" data-add-back-btn="true">
+			<div data-role="header" data-position="fixed"  data-tap-toggle="false">
+				<h1>Flight Status</h1>
+
+			</div>
+			<div data-role="content">
+				<ul data-role="listview" id="Ul1" data-inset="true" data-theme="d">
+					<li>Coming Soon!</li>
+				</ul>
+			</div>
+		</div>
+        
+		<!--bagTrack page-->
+		<div id="bagTrack" data-role="page" data-add-back-btn="true">
+			<div data-role="header" data-position="fixed"  data-tap-toggle="false">
+				<h1>Bag Track</h1>
+			</div>
+			<div data-role="content">
+				<ul data-role="listview" id="Ul2" data-inset="true" data-theme="d">
+					<li>Coming Soon!</li>
+				</ul>
+			</div>
+		</div>
+
+		<!--programProgress page-->
+		<div id="programProgress" data-role="page" data-add-back-btn="true">
+			<div data-role="header" data-position="fixed"  data-tap-toggle="false">
+				<h1>Progress</h1>
+			</div>
+			<div data-role="content">
+				<ul data-role="listview" id="Ul3" data-inset="true" data-theme="d">
+					<li>Coming Soon!</li>
+				</ul>
+			</div>
+		</div>
+        
+        <!--Settings page-->
+		<div id="settings" data-role="page" data-add-back-btn="true">
+			<div data-role="header" data-position="fixed"  data-tap-toggle="false">
+				<h1>Settings</h1>
+			</div>
+			<div data-role="content">
+				<ul data-role="listview" id="Ul4" data-inset="true" data-theme="d">
+					<li>Come on, this is just a sample!</li>
+				</ul>
+			</div>
+		</div>
 	
-    
-    <script id="Template-expenses" type="text/html">
-		<li data-theme="a" data-role="collapsible" data-collapsed="true">
-			<a name='${Name}' id='eventLink' data-transition="slide" href='#page-eventdetails' onclick='gotoEvent(name)'>
-				<h4>${Country}</h4>
-				<h5>${City}</h4>
-        		<h7>${DateStart}</h4>
-			</a>
-		</li>
-    </script>
-    
-    <script id="Template-houses" type="text/html">
-		<li data-theme="a" data-role="collapsible" data-collapsed="true">
-			<a name='${ID}' id='houseLink' data-transition="slide" href='#page-housedetails' onclick='gotoHouse(name)'>
-				<h4>${Address} Rating = ${Rating}</h4>
-				
-			</a>
-		</li>
-    </script>
-    
-    
-    
-</head>
-    
-    <style scoped>
-.button {
-    margin-left: .5em;
-    text-align: center;
-}
-.km-root .selected-button
-{
-    color: #fff;
-    background-color: #f60;
-}
-/* solid filled buttons in iOS7 should override the border-color */
-.km-ios7 .selected-button
-{
-    border-color: transparent;
-}
-.button:first-of-type {
-    margin-left: 1em;
-}
-.home {
-    background: url(../../content/mobile/shared/sports-home.jpg) no-repeat center center;	
-}
-.facility {
-    background: url(../../content/mobile/shared/sports-facility.jpg) no-repeat center center;	
-}
-.sports {
-    background: url(../../content/mobile/shared/sports.jpg) no-repeat center center;	
-}
-#button-home .head,
-#facility .head,
-#sports .head {
-	display: block;
-	margin: 1em;
-	height: 120px;
-    -webkit-background-size: 100% auto;
-    background-size: 100% auto;
-}
-.km-ios .head,
-.km-blackberry .head {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-}
-        
-        
-        .km-ios #listview-home .km-content {
-        background: url(../../content/shared/images/patterns/pattern2.png);
-        box-shadow: inset 0 0 30px #95764D;
-        -webkit-box-shadow: inset 0 0 30px #95764D;
-    }
-    .km-ios #listview-home .km-listview .km-list {
-        border-radius: 10px;
-        -webkit-border-radius: 10px;
-        box-shadow: 0 1px 5px #95764D;
-        -webkit-box-shadow: 0 1px 5px #95764D;
-    }
-    .km-ios #listview-home .km-listview .km-list > li {
-        border: none;
-    }
-    .km-ios #listview-home .km-listview .km-list > li:last-child {
-        -webkit-box-shadow: none;
-        box-shadow: none;
-    }
-    .km-ios #listview-home .km-navbar {
-        background: url(../../content/shared/images/patterns/pattern9.png);
-    }
-    .km-tablet .km-ios #listview-home .km-view-title {
-        color: #fff;
-        text-shadow: 0 -1px rgba(0,0,0,.5);
-    }
-    .km-ios #listview-home .km-navbar .km-button
-    {
-        background-color: #974d2e;
-    }
-</style>
-    
-<body>
-    <!--Home-->
-    <div id="tabstrip-home"
-        data-role="view"
-        data-title="Home">
-        <div data-role="content">
-			<h1>HELLO! U're welcome</h1>
-			<h2>to CouchSurfing App</h2>
-			<div id="mainJobs">
-                <h2><a class="button" data-role="button" style="width:220px" id="downloadButton">Download all data</a></h2>    
-                <h2><a class="button" data-role="button" href="#tabstrip-events" style="width:220px" id="butonevents">Show All events</a></h2>    
-                <h2><a class="button" data-role="button" href="#tabstrip-houses" style="width:220px" id="buttonHouses">Show All houses</a></h2>
-                	<a href="#tabstrip-location" data-icon="search" onclick='changeviewtomap()'>Goto map</a>
-			</div>
-			</div>
-    </div>
-    
-    
-    <!--<script>
-            function setli(){
-        
-        
-        var ripka;
-        $('#listik').html( $('#listik').html()+"<li>Events");
-                for(ripka=0;ripka<=5;ripka++){
-                 $('#listik').html( $('#listik').html()+"<ul><li data-icon='toprated'><a>Very interesting event #"+ripka+"</a></li></ul>");
-                 }
-                $('#listik').html( $('#listik').html()+"</li>");
-                
-        var bibka;
-        $('#houseList').html( $('#houseList').html()+"<li>Houses");
-                for(bibka=0;bibka<=5;bibka++){
-                 $('#houseList').html( $('#houseList').html()+"<ul><li data-icon='toprated'><a>Very interesting house #"+bibka+"</a></li></ul>");
-                 }
-                $('#houseList').html( $('#houseList').html()+"</li>");
-                
-                
-            }
-    </script>-->
-    
-    
-    
-    <!--Events-->
-    <div id="tabstrip-events"
-        data-role="view"
-        data-title="Events"> 
-        <div data-role="content" class="content">
-            
-                
-			<ul data-role="listview" data-split-icon="gear" data-theme="c" data-divider-theme="c" id="expensesShownList" data-inset="true">
-			</ul>   
-        </div>
-       
-    </div>
-    
- <!--Houses-->
-    <div id="tabstrip-houses"
-        data-role="view"
-        data-title="Houses"> 
-        <div data-role="content" class="content">
-            
-               <ul id="houseList"data-role="listview" data-split-icon="gear" data-theme="c" data-divider-theme="c" data-inset="true">
-                   
-               </ul>      
-        </div>
-       
-    </div>
-
-    
-    
-        <div id="page-eventdetails"
-        data-role="view"
-        data-title="Event"> 
-       <div data-role="content" class="content-overflow">
-
-			<h2 id="jDetailsLabel">Event details</h2>
-            
-			<form id="jForm" method="get">
-
-				<div id="contentPrimary" class="content-primary">
-					<br />
-                    <div id="vDb" class="dateboxField">
-						<label for="linked2">Name</label>
-						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Name" id="linked2"/>
-						<br />
-					</div>
-					<div id="jst" class="dateboxField">
-						<label for="linked2">DateStart</label>
-						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: DateStart" id="linked2"/>
-						<br />
-					</div>
-
-					<div id="vDb" class="dateboxField">
-						<label for="linked2">DateEnd</label>
-						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: DateEnd" id="linked2"/>
-						<br />
-					</div>
-                    
-                    <div id="vDb" class="dateboxField">
-						<label for="linked2">Country</label>
-						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Country" id="linked2"/>
-						<br />
-					</div>
-                     <div id="vDb" class="dateboxField">
-						<label for="linked2">City</label>
-						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: City" id="linked2"/>
-						<br />
-					</div>
-                     <div id="vDb" class="dateboxField">
-						<label for="linked2">Description</label>
-						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Description" id="linked2"/>
-						<br />
-					</div>
-                     <div id="vDb" class="dateboxField">
-						<label for="linked2">Longitude</label>
-						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Longitude" id="linked2"/>
-						<br />
-					</div>
-                     <div id="vDb" class="dateboxField">
-						<label for="linked2">Latitude</label>
-						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Latitude" id="linked2"/>
-						<br />
-					</div>
-			
-                	<a href="#tabstrip-location" data-icon="search" onclick='changeviewtomap()'>Goto map</a>
-                    <input data-theme='d' id="SaveEvent" type="submit" value="SAVE" >
-				</div>
-			</form>
-		</div>
-       
-    </div>
-    
-    
-    
-        <div id="page-housedetails"
-        data-role="view"
-        data-title="Houses"> 
-       <div data-role="content" class="content-overflow">
-
-			<h2 id="jDetailsLabel">House details</h2>
-            
-			<form id="jForm" method="get">
-
-				<div id="contentPrimary" class="content-primary">
-					<br />
-                    <div id="vDb" class="dateboxField">
-						<label for="linked2">ID</label>
-						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: ID" id="linked2"/>
-						<br />
-					</div>
-					<div id="jst" class="dateboxField">
-						<label for="linked2">Address</label>
-						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Address" id="linked2"/>
-						<br />
-					</div>
-
-					<div id="vDb" class="dateboxField">
-						<label for="linked2">Rating</label>
-						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Rating" id="linked2"/>
-						<br />
-					</div>
-                    
-                    <div id="vDb" class="dateboxField">
-						<label for="linked2">UserMarks</label>
-						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: UserMarks" id="linked2"/>
-						<br />
-					</div>
-                     <div id="vDb" class="dateboxField">
-						<label for="linked2">Comments</label>
-						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Comments" id="linked2"/>
-						<br />
-					</div>			
-                    <input data-theme='d' id="SaveHouse" type="submit" value="SAVE" >
-				</div>
-			</form>
-		</div>
-       
-    </div>
-    
-    
-    
-    <!--Location-->
-    <div id="tabstrip-location"
-        data-role="view"
-        data-title="Location"
-        data-init="app.locationService.initLocation"
-        data-show="app.locationService.show"
-        data-hide="app.locationService.hide"
-        data-model="app.locationService.viewModel"
-        data-stretch="true">
-
-        <div id="no-map" data-bind="invisible: isGoogleMapsInitialized">
-            Location requires internet connection to display the map.
-        </div>
-        <div id="map-search-wrap" data-bind="visible: isGoogleMapsInitialized">
-            <button id="map-navigate-home" data-bind="click: onNavigateHome"></button>
-            <form onsubmit="return false;">
-                <input id="map-address" type="search" data-bind="value: address" placeholder="Address" />
-                <input id="map-search" type="submit" value="" data-bind="click: onSearchAddress" />
-            </form>
-        </div>
-        <div id="map-canvas" data-bind="visible: isGoogleMapsInitialized"></div>
-
-    </div>
-
-    <!--Weather-->
-    <div id="tabstrip-weather"
-        data-role="view"
-        data-title="Weather"
-        data-model="app.weatherService.viewModel">
-
-        <div class="weather">
-            <p class="weather-title">Погода на 7 днів</p>
-            <div class="separator">
-                <div class="dark"></div>
-                <div class="light"></div>
-            </div>
-
-            <ul class="forecast-list"
-                data-role="listview"
-                data-bind="source: weatherDataSource"
-                data-template="weather-forecast-template">
-            </ul>
-        </div>
-    </div>
-
-    <!--Weather forecast template-->
-    <script type="text/x-kendo-tmpl" id="weather-forecast-template">
-        <div>
-            <div class="position-left">
-                <span class="weather-info date">${day}</span>
-            </div>
-            <div class="position-right">
-                <span class="weather-info temperature high">${highTemperature}<sup>&deg;</sup></span>
-                <span class="weather-info temperature low">${lowTemperature}<sup>&deg;</sup></span>
-            </div>
-            <div class="position-center">
-                <span class="weather-icon ${image}"></span>
-            </div>
-        </div>
-    </script>
-
-    <!--Layout-->
-    <div data-role="layout" data-id="tabstrip-layout">
-
-        <!--Header-->
-        <div data-role="header">
-            <div data-role="navbar">
-                <span data-role="view-title"></span>
-            </div>
-        </div>
-
-        <!--Footer-->
-        <div data-role="footer">
-            <div data-role="tabstrip">
-                <a href="#tabstrip-home" data-icon="favorites">Home</a>
-                <a href="#tabstrip-events" data-icon="cart">Events</a>
-                <a href="#tabstrip-houses" data-icon="home">Houses</a>
-                <a href="#tabstrip-location" data-icon="search">Location</a>
-                <a href="#tabstrip-weather" data-icon="globe">Weather</a>
-            </div>
-        </div>
-    </div>
-</body>
+    </body>
 </html>
+            
+<script>
+    var seatMapDrawing = new seatMapDrawing();
+	var airData = new airlinesData(2000);
+	var airlines = new airlinesApp();
+    airlines.run();
+</script>
+        

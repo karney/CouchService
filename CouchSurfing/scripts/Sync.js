@@ -15,7 +15,6 @@ function SyncExpensesNow() {
 
 function SyncHouses() {
     console.log('Sync houses');
- 
     
     $.ajax({
             url: url + "GetHouses",
@@ -46,7 +45,7 @@ function SaveEvents(curEvent) {
  
     
     $.ajax({
-            url: url + "SetEven?n"+curEvent.Name+"&c="+curEvent.Country+"&ci="+curEvent.City+"&d="+curEvent.Description+"&l="+curEvent.Longitude+"&la="+curEvent.Latitude,
+            url: url + "SetEven?n"+curEvent.Name+"&c="+curEvent.Country+"&ci="+curEvent.City+"&d="+curEvent.Description,
             type: 'GET',
             dataType: 'text',
             success : function(text){processExpensesData(text);},
@@ -75,6 +74,12 @@ function processHousesData(data) {
         
         allHouses=jsData;
 		console.log(allHouses);
+        countHouses = allHouses.length;
+        var startline1=$("#totalhousesss").html()
+        $("#totalhousesss").html(startline1+"  "+countHouses);
+		$("#totalhousesss1").html(countHouses);
+		console.log($("#totalhousesss").html());
+        alert('Houses downloaded complete');
     }
     catch(e){
          console.log(e.message);
@@ -90,6 +95,13 @@ function processExpensesData(data) {
         
         allEvents=jsData;
 console.log(allEvents);
+        countEvents = allEvents.length;
+        var startline=$("#totalEventsss").html()
+        $("#totalEventsss").html(startline+"  "+countEvents);
+        $("#totalEventsss1").html(countEvents);
+        
+		console.log($("#totalEventsss").html());
+        alert('Events downloaded complete');
     }
     catch(e){
          console.log(e.message);
