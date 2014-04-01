@@ -83,12 +83,16 @@ function changeviewtomap(){
 }
 
 $(document).on('pageshow', '#tabstrip-location', function() 
-{
-     $('#map_canvas').gmap();
-                $('#map_canvas').gmap({ 'center': '42.345573,-71.098326' });               
-                $('#map_canvas').gmap({ 'zoom': 8 });
-                $('#map_canvas').gmap('refresh');
-            
+{ 
+    
+    
+      var minZoomLevel = 12;
+
+   var map = new google.maps.Map(document.getElementById('map_canvas'), {
+      zoom: minZoomLevel,
+      center: new google.maps.LatLng(38.50, -90.50),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+   });
     
     
     
