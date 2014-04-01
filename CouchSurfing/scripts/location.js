@@ -15,9 +15,9 @@
             var that = this,
                 position;
 
-            that._isLoading = true;
-            that.showLoading();
-
+            //that._isLoading = true;
+            //that.showLoading();
+debugger;
             navigator.geolocation.getCurrentPosition(
             
                 function (position) {
@@ -114,7 +114,8 @@
 
             map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
             geocoder = new google.maps.Geocoder();
-            app.locationService.viewModel.onNavigateHome.apply(app.locationService.viewModel, []);
+                        
+           // debugger;
         },
 
         show: function () {
@@ -124,6 +125,9 @@
 
             //show loading mask in case the location is not loaded yet 
             //and the user returns to the same tab
+            
+            
+            
             app.locationService.viewModel.showLoading();
 
             //resize the map in case the orientation has been changed while showing other tab

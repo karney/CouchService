@@ -10,14 +10,21 @@ $('#tabstrip-home').ready(function (e) {
     });
     
     $('#butonevents').click(function (e) {
-
-        createListEvents();
-        createListHouses();
+        if(isHousesViewLoaded!==true){
+            createListHouses();
+        }
+        if(isEventViewLoaded!==true){
+            createListEvents();
+        }
     });
       $('#buttonHouses').click(function (e) {
        
-        createListEvents();
-        createListHouses();
+        if(isHousesViewLoaded!==true){
+            createListHouses();
+        }
+        if(isEventViewLoaded!==true){
+            createListEvents();
+        }
     });
 });
 
@@ -29,19 +36,10 @@ function createListEvents(){
     
     $.each(allEvents, function (ind, valu) {
         
-			$('#expensesShownList').append("<li data-theme='a' data-role='list-divider'><a href='#page-eventdetails''>"+valu.Name+"</a></li>");
-			console.log(valu.Name);
+			$('#expensesShownList').append("<li data-theme='a' data-role='list-divider'><a name='"+valu.Name+"' data-transition='slide' href='#page-eventdetails' onclick='gotoEvent(name)'>"+valu.Name+"</a></li>");
+			//console.log(valu.Name);
 		});
-   
-    
-   
-                    /*    var spacer = document.createElement("li");
-                            spacer.setAttribute('data-role', 'list-divider');
-        					$('#listik').append(spacer);
-                        
-                        $.tmpl($('#Template-expenses'), valu).appendTo('#expensesShownList');
-                 
-                    });  */      
+    isEventViewLoaded=true;
 }
 
 
@@ -50,20 +48,24 @@ function createListHouses(){
     
     $('#houseList').empty();
     $.each(allHouses, function (ind, valu) {
-                      
-                        var spacer = document.createElement("li");
-                            spacer.setAttribute('data-role', 'list-divider');
-                            $('#listik').append(spacer);
-                        
-                        $.tmpl($('#Template-houses'), valu).appendTo('#houseList');
-                 
-                    });        
+                      $('#houseList').append("<li data-theme='a' data-role='list-divider'><a name='"+valu.ID+"' data-transition='slide' href='#page-housedetails' onclick='gotoHouse(name)'>"+valu.ID+"<br/>"+valu.Address+"</a></li>");
+						//console.log(valu.ID);
+                    }); 
+    isHousesViewLoaded=true;
 }
-
+ function initializemap() {
+        var map_canvas = document.getElementById('map_canvas');
+        var map_options = {
+          center: new google.maps.LatLng(44.5403, -78.5463),
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(map_canvas, map_options)
+      }
 
 function changeviewtomap(){
-		try{
-           // debugger;
+    		try{
+            
             var curJs = jlinq.from(allEvents).equals("Name", currentEventMY).first();
                 if(curJs){
                 longitudeMY=curJs.Longitude;
@@ -79,3 +81,29 @@ function changeviewtomap(){
     console.log(latitudeMY);
     
 }
+
+$(document).on('pageshow', '#tabstrip-location', function() 
+{
+     $('#map_canvas').gmap();
+                $('#map_canvas').gmap({ 'center': '42.345573,-71.098326' });               
+                $('#map_canvas').gmap({ 'zoom': 8 });
+                $('#map_canvas').gmap('refresh');
+            
+    
+    
+    
+    
+  /*  
+   // debugger;
+        app.locationService.initLocation();
+        app.locationService.show();
+        //app.locationService.hide();
+    
+  		ko.applyBindings(app.locationService.viewModel, document.getElementById("tabstrip-location"));
+    
+    console.log(app.locationService.viewModel);
+      // debugger;
+   // alert('uhuu');
+    //$('#map-canvas').*/
+});
+

@@ -8,6 +8,8 @@ var longitudeMY;
 var latitudeMY;
 var countEvents;
 var countHouses;
+var isEventViewLoaded;
+var isHousesViewLoaded;
 
 function gotoEvent(nnn){
      console.log('click');
