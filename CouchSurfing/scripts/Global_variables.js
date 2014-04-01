@@ -1,4 +1,4 @@
-var url = "http://192.168.2.157:53255/Service1.svc/JSON/";
+var url = "http://localhost:53255/Service1.svc/JSON/";
 var iseventsloaded=false;
 var countofevents=0;
 var allEvents;

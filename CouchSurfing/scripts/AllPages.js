@@ -25,15 +25,23 @@ $('#tabstrip-home').ready(function (e) {
 
 function createListEvents(){
     $('#expensesShownList').empty();
+    
+    
     $.each(allEvents, function (ind, valu) {
-                      
-                        var spacer = document.createElement("li");
+        
+			$('#expensesShownList').append("<li data-theme='a' data-role='list-divider'><a href='#page-eventdetails''>"+valu.Name+"</a></li>");
+			console.log(valu.Name);
+		});
+   
+    
+   
+                    /*    var spacer = document.createElement("li");
                             spacer.setAttribute('data-role', 'list-divider');
-                            $('#listik').append(spacer);
+        					$('#listik').append(spacer);
                         
                         $.tmpl($('#Template-expenses'), valu).appendTo('#expensesShownList');
                  
-                    });        
+                    });  */      
 }
 
 

@@ -79,7 +79,7 @@ function processHousesData(data) {
         $("#totalhousesss").html(startline1+"  "+countHouses);
 		$("#totalhousesss1").html(countHouses);
 		console.log($("#totalhousesss").html());
-        alert('Houses downloaded complete');
+    //    alert('Houses downloaded complete');
     }
     catch(e){
          console.log(e.message);
@@ -101,7 +101,7 @@ console.log(allEvents);
         $("#totalEventsss1").html(countEvents);
         
 		console.log($("#totalEventsss").html());
-        alert('Events downloaded complete');
+    //    alert('Events downloaded complete');
     }
     catch(e){
          console.log(e.message);

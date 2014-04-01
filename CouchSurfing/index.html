@@ -53,13 +53,39 @@
         <!--<link rel="stylesheet" media="only screen and (min-device-width: 600px) and (max-device-width: 1024px) and (-webkit-device-pixel-ratio:1)" href="styles/tablet-600-1024.css" type="text/css" />-->
         <!-- Tablet 768x1024 High DPI (aka iPad3") -->
         <!--<link rel="stylesheet" media="only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-device-pixel-ratio:2)" href="styles/tablet-1024-hdpi.css" type="text/css" />-->
-	</head>
+	
+        
+        
+        <script id="Template-expenses" type="text/html">
+		<li data-theme="a" data-role="collapsible" data-collapsed="true">
+			<a name='${Name}' id='eventLink' data-transition="slide" href='#page-eventdetails' onclick='gotoEvent(name)'>
+				<h4>${Country}</h4>
+				<h5>${City}</h4>
+        		<h7>${DateStart}</h4>
+			</a>
+		</li>
+    </script>
+    
+    <script id="Template-houses" type="text/html">
+		<li data-theme="a" data-role="collapsible" data-collapsed="true">
+			<a name='${ID}' id='houseLink' data-transition="slide" href='#page-housedetails' onclick='gotoHouse(name)'>
+				<h4>${Address} Rating = ${Rating}</h4>
+				
+			</a>
+		</li>
+    </script>
+        
+        
+        
+        
+        
+    </head>
 	<body>
         
         <!-- home page -->
 		<div id="home" data-role="page" data-mini="true">
 			<div data-role="header"  data-position="fixed"  data-tap-toggle="false">
-                <h1>Hi <span id="ffname"></span>!</h1>
+                <h1>Couch surfing</h1>
 			</div>
 			<div class="info-wrapper">
 				<div class="info-wrapper-left">
@@ -343,6 +369,250 @@
 			</div>
 		</div>
 	
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+     <!--Events-->
+    <div id="tabstrip-events"
+        data-role="view"
+        data-title="Events"> 
+        <div data-role="content" class="content">
+            
+                
+			<ul data-role="listview" data-split-icon="gear" data-theme="c" data-divider-theme="c" id="expensesShownList" data-inset="true">
+			</ul>   
+        </div>
+       
+    </div>
+    
+ <!--Houses-->
+    <div id="tabstrip-houses"
+        data-role="view"
+        data-title="Houses"> 
+        <div data-role="content" class="content">
+            
+               <ul id="houseList"data-role="listview" data-split-icon="gear" data-theme="c" data-divider-theme="c" data-inset="true">
+                   
+               </ul>      
+        </div>
+       
+    </div>
+
+    
+    
+        <div id="page-eventdetails"
+        data-role="view"
+        data-title="Event"> 
+       <div data-role="content" class="content-overflow">
+
+			<h2 id="jDetailsLabel">Event details</h2>
+            
+			<form id="jForm" method="get">
+
+				<div id="contentPrimary" class="content-primary">
+					<br />
+                    <div id="vDb" class="dateboxField">
+						<label for="linked2">Name</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Name" id="linked2"/>
+						<br />
+					</div>
+					<div id="jst" class="dateboxField">
+						<label for="linked2">DateStart</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: DateStart" id="linked2"/>
+						<br />
+					</div>
+
+					<div id="vDb" class="dateboxField">
+						<label for="linked2">DateEnd</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: DateEnd" id="linked2"/>
+						<br />
+					</div>
+                    
+                    <div id="vDb" class="dateboxField">
+						<label for="linked2">Country</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Country" id="linked2"/>
+						<br />
+					</div>
+                     <div id="vDb" class="dateboxField">
+						<label for="linked2">City</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: City" id="linked2"/>
+						<br />
+					</div>
+                     <div id="vDb" class="dateboxField">
+						<label for="linked2">Description</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Description" id="linked2"/>
+						<br />
+					</div>
+                     <div id="vDb" class="dateboxField">
+						<label for="linked2">Longitude</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Longitude" id="linked2"/>
+						<br />
+					</div>
+                     <div id="vDb" class="dateboxField">
+						<label for="linked2">Latitude</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Latitude" id="linked2"/>
+						<br />
+					</div>
+			
+                	<a href="#tabstrip-location" data-icon="search" onclick='changeviewtomap()'>Goto map</a>
+                    <input data-theme='d' id="SaveEvent" type="submit" value="SAVE" >
+				</div>
+			</form>
+		</div>
+       
+    </div>
+    
+    
+    
+        <div id="page-housedetails"
+        data-role="view"
+        data-title="Houses"> 
+       <div data-role="content" class="content-overflow">
+
+			<h2 id="jDetailsLabel">House details</h2>
+            
+			<form id="jForm" method="get">
+
+				<div id="contentPrimary" class="content-primary">
+					<br />
+                    <div id="vDb" class="dateboxField">
+						<label for="linked2">ID</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: ID" id="linked2"/>
+						<br />
+					</div>
+					<div id="jst" class="dateboxField">
+						<label for="linked2">Address</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Address" id="linked2"/>
+						<br />
+					</div>
+
+					<div id="vDb" class="dateboxField">
+						<label for="linked2">Rating</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Rating" id="linked2"/>
+						<br />
+					</div>
+                    
+                    <div id="vDb" class="dateboxField">
+						<label for="linked2">UserMarks</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: UserMarks" id="linked2"/>
+						<br />
+					</div>
+                     <div id="vDb" class="dateboxField">
+						<label for="linked2">Comments</label>
+						<input class="smallSpacer ui-input-text ui-body-c" name="linked2" type="text" data-bind="value: Comments" id="linked2"/>
+						<br />
+					</div>			
+                    <input data-theme='d' id="SaveHouse" type="submit" value="SAVE" >
+				</div>
+			</form>
+		</div>
+       
+    </div>
+    
+    
+    
+    <!--Location-->
+    <div id="tabstrip-location"
+        data-role="view"
+        data-title="Location"
+        data-init="app.locationService.initLocation"
+        data-show="app.locationService.show"
+        data-hide="app.locationService.hide"
+        data-model="app.locationService.viewModel"
+        data-stretch="true">
+
+        <div id="no-map" data-bind="invisible: isGoogleMapsInitialized">
+            Location requires internet connection to display the map.
+        </div>
+        <div id="map-search-wrap" data-bind="visible: isGoogleMapsInitialized">
+            <button id="map-navigate-home" data-bind="click: onNavigateHome"></button>
+            <form onsubmit="return false;">
+                <input id="map-address" type="search" data-bind="value: address" placeholder="Address" />
+                <input id="map-search" type="submit" value="" data-bind="click: onSearchAddress" />
+            </form>
+        </div>
+        <div id="map-canvas" data-bind="visible: isGoogleMapsInitialized"></div>
+
+    </div>
+
+    <!--Weather-->
+    <div id="tabstrip-weather"
+        data-role="view"
+        data-title="Weather"
+        data-model="app.weatherService.viewModel">
+
+        <div class="weather">
+            <p class="weather-title">Погода на 7 днів</p>
+            <div class="separator">
+                <div class="dark"></div>
+                <div class="light"></div>
+            </div>
+
+            <ul class="forecast-list"
+                data-role="listview"
+                data-bind="source: weatherDataSource"
+                data-template="weather-forecast-template">
+            </ul>
+        </div>
+    </div>
+
+    <!--Weather forecast template-->
+    <script type="text/x-kendo-tmpl" id="weather-forecast-template">
+        <div>
+            <div class="position-left">
+                <span class="weather-info date">${day}</span>
+            </div>
+            <div class="position-right">
+                <span class="weather-info temperature high">${highTemperature}<sup>&deg;</sup></span>
+                <span class="weather-info temperature low">${lowTemperature}<sup>&deg;</sup></span>
+            </div>
+            <div class="position-center">
+                <span class="weather-icon ${image}"></span>
+            </div>
+        </div>
+    </script>
+
+    <!--Layout-->
+    <div data-role="layout" data-id="tabstrip-layout">
+
+        <!--Header-->
+        <div data-role="header">
+            <div data-role="navbar">
+                <span data-role="view-title"></span>
+            </div>
+        </div>
+
+        <!--Footer-->
+        <div data-role="footer">
+            <div data-role="tabstrip">
+                <a href="#tabstrip-home" data-icon="favorites">Home</a>
+                <a href="#tabstrip-events" data-icon="cart">Events</a>
+                <a href="#tabstrip-houses" data-icon="home">Houses</a>
+                <a href="#tabstrip-location" data-icon="search">Location</a>
+                <a href="#tabstrip-weather" data-icon="globe">Weather</a>
+            </div>
+        </div>
+    </div>    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     </body>
 </html>
             
